@@ -76,7 +76,25 @@ D:\CWorkspace\xf86-video-qxl_origin\scripts\Xspice:
 - 另外文檔要求兩臺可以互聯的Intel Linux，我其實并沒有這樣的條件，但是先配置吧，反正可以把環境先搭起來。
 - gstreamer安裝時出現如下錯誤
 
+```bash
+root@haoyuan-Broadwell:/home/spice-h264/gstreamer# ./autogen.sh
++ check for build tools
+  checking for autoreconf ... 
+/usr/bin/autoreconf
+  checking for pkg-config ... 
+/usr/bin/pkg-config
++ checking for autogen.sh options
+  This autogen script will automatically run ./configure as:
+  ./configure --enable-maintainer-mode --enable-gtk-doc --enable-failing-tests --enable-poisoning
+  To pass any additional options, please specify them on the ./autogen.sh
+  command line.
++ running autopoint --force...
+./autogen.sh: 108: ./autogen.sh: autopoint: not found
+
+autopoint failed
+```
 
 
 ### Left
 
+ 从gstreamer往后的所有安装配置工作
