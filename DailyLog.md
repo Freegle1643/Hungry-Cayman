@@ -72,6 +72,10 @@ D:\CWorkspace\xf86-video-qxl_origin\scripts\Xspice:
 
 ### Logs
 
+- 文檔中libva的安裝出現了warning，已記截屏記錄
+- 另外文檔要求兩臺可以互聯的Intel Linux，我其實并沒有這樣的條件，但是先配置吧，反正可以把環境先搭起來。
+- gstreamer安裝時出現如下錯誤
+
 
 
 ### Left
