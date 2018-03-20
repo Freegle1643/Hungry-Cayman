@@ -53,10 +53,26 @@ D:\CWorkspace\xf86-video-qxl_origin\scripts\Xspice:
 
 ### Left
 
-根据gstreamer官网的指示，等明天去Linux里看一看是怎么回事
+根据gstreamer官网的指示，等后面去Linux里看一看是怎么回事
 
 > Linux
 >
 > Most, if not all, Linux distributions provide packages of GStreamer. You should find these in your distribution's package repository. 
 > Note that some distributions split the GStreamer plugins up further than the upstream sources. Additionally, some distributions do not include the gst-plugins-bad, gst-plugins-ugly, and gst-libav packages in their main repository, for legal reasons.
+
+
+
+## 3-20
+
+### To-Dos
+
+- Review SPICE with Vaapi h.264 Doc
+  - Document literacy
+  - Step-by-step correctness
+
+### Logs
+
+
+
+### Left
 
