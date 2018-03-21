@@ -109,7 +109,7 @@ autopoint failed
 
 - 解决3-20的`autopoint failed`错误：
 
-根据网上查询的资料，需要使用如下命令先安装一些应用程序
+【!】根据网上查询的资料，需要使用如下命令先安装一些应用程序
 
 ```bash
 apt-get install autoconf automake libtool autopoint
@@ -127,7 +127,7 @@ configure: error: You need to have gtk-doc >= 1.12 installed to build GStreamer
   configure failed
 ```
 
-根据`apt-cache search`的搜寻， 又安装了`gtk-doc*`，再次运行出现下列报错：
+【!】根据`apt-cache search`的搜寻， 又安装了`gtk-doc*`，再次运行出现下列报错：
 
 ```bash
 checking for valgrind... no
@@ -150,6 +150,8 @@ See the pkg-config man page for more details.
   configure failed
 ```
 
+{
+
 根据`apt-cache search`的搜寻， 预计安装如下两个包：
 
 ```bash
@@ -171,7 +173,71 @@ apt get install vavlgrind*
 apt-get install gir1.2-gconf-2.0 gir1.2-gdkpixbuf-2.0 gir1.2-gee-0.8 gir1.2-gudev-1.0 gir1.2-secret-1 gir1.2-telepathyglib-0.12 gobject-introspection  gir1.2-farstream-0.1  gir1.2-farstream-0.2  gir1.2-folks-0.6   gir1.2-libvirt-glib-1.0   gir1.2-farstream-0.2   gir1.2-folks-0.6   gir1.2-libvirt-glib-1.0   gir1.2-spice-client-glib-2.0  gir1.2-spice-client-gtk-2.0  gir1.2-spice-client-gtk-3.0   gir1.2-uhm-0.0
 ```
 
+仍然有错
 
+> Xinda: no不用管，关键还是那些missing的package
+
+}
+
+于是上面{}内的暂且不用管了，我们根据
+
+```bash
+checking for GTKDOC_DEPS... configure: error: Package requirements (glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0) were not met:
+
+No package 'glib-2.0' found
+No package 'gobject-2.0' found
+```
+
+【!】去安装glib和gobject：
+
+```bash
+apt-get install glib*
+apt-get install gobject-introspection
+```
+
+如果再出错，根据网上的搜寻，再安装下面的软件包即可，至此，gstreamer安装完成
+
+```bash
+apt-get install libglib2.0-dev
+```
+
+成功信息
+
+- 安装gst-plugins-base
+
+`./autogen.sh` 出现如下错误 
+
+```bash
+configure: No package 'gstreamer-1.0' found
+configure: error: no gstreamer-1.0 >= 1.13.1 (GStreamer) found
+  configure failed
+```
+
+？？？那我上一步安的是什么东西？？？
+
+我们先看如何解决
+
+```bash
+root@haoyuan-Broadwell:/home/spice-h264/gst-plugins-base# apt-cache search gstreamer-1.0
+libqt5gstreamer-1.0-0 - C++ bindings library for GStreamer with a Qt-style API - Qt 5 build
+libqtgstreamer-1.0-0 - C++ bindings library for GStreamer with a Qt-style API
+gir1.2-gstreamer-1.0 - GObject introspection data for the GStreamer library
+```
+
+悉数安装
+
+```bash
+apt-get install libqt5gstreamer-1.0-0 libqtgstreamer-1.0-0 gir1.2-gstreamer-1.0
+```
+
+同样的问题，有搜集了网上的答案
+
+```bash
+apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+```
+
+还是不行，暂时留到明天
 
 ### Left
 
+- 解决gstreamer安装问题
