@@ -115,7 +115,44 @@ autopoint failed
 apt-get install autoconf automake libtool autopoint
 ```
 
+之后再次运行`./autogen.sh`还是出现问题：
 
+```bash
+checking for valgrind... no
+checking for gobject-introspection... no
+checking for gtkdoc-check... no
+checking for gtkdoc-rebase... no
+checking for gtkdoc-mkpdf... no
+configure: error: You need to have gtk-doc >= 1.12 installed to build GStreamer
+  configure failed
+```
+
+根据`apt-cache search`的搜寻， 又安装了`gtk-doc*`，再次运行出现下列报错：
+
+```bash
+checking for GTKDOC_DEPS... configure: error: Package requirements (glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0) were not met:
+
+No package 'glib-2.0' found
+No package 'gobject-2.0' found
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables GTKDOC_DEPS_CFLAGS
+and GTKDOC_DEPS_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+  configure failed
+```
+
+根据`apt-cache search`的搜寻， 预计安装如下两个包：
+
+```bash
+gir1.2-glib-2.0 - Introspection data for GLib, GObject, Gio and GModule
+gir1.2-spice-client-glib-2.0 - GObject for communicating with Spice servers (GObject-Introspection)
+```
+
+Sadly，还是同样的报错。
 
 ### Left
 
