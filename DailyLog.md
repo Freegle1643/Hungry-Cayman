@@ -130,6 +130,11 @@ configure: error: You need to have gtk-doc >= 1.12 installed to build GStreamer
 根据`apt-cache search`的搜寻， 又安装了`gtk-doc*`，再次运行出现下列报错：
 
 ```bash
+checking for valgrind... no
+checking for gobject-introspection... no
+checking for gtkdoc-check... /usr/bin/gtkdoc-check
+checking for gtkdoc-rebase... /usr/bin/gtkdoc-rebase
+checking for gtkdoc-mkpdf... /usr/bin/gtkdoc-mkpdf
 checking for GTKDOC_DEPS... configure: error: Package requirements (glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0) were not met:
 
 No package 'glib-2.0' found
@@ -152,7 +157,14 @@ gir1.2-glib-2.0 - Introspection data for GLib, GObject, Gio and GModule
 gir1.2-spice-client-glib-2.0 - GObject for communicating with Spice servers (GObject-Introspection)
 ```
 
-Sadly，还是同样的报错。
+Sadly，还是同样的报错，于是从valgrind开始逐个安装
+
+```bash
+apt get install vavlgrind* \
+
+```
+
+
 
 ### Left
 
