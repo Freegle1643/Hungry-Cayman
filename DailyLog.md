@@ -98,3 +98,24 @@ autopoint failed
 ### Left
 
  从gstreamer往后的所有安装配置工作
+
+## 3-21
+
+### To-Dos
+
+- 尽量配置完所有的步骤
+
+### Logs
+
+- 解决3-20的`autopoint failed`错误：
+
+根据网上查询的资料，需要使用如下命令先安装一些应用程序
+
+```bash
+apt-get install autoconf automake libtool autopoint
+```
+
+
+
+### Left
+
