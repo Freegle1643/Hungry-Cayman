@@ -160,8 +160,15 @@ gir1.2-spice-client-glib-2.0 - GObject for communicating with Spice servers (GOb
 Sadly，还是同样的报错，于是从valgrind开始逐个安装
 
 ```bash
-apt get install vavlgrind* \
+apt get install vavlgrind*
+```
 
+成功安装`checking for valgrind... /usr/bin/valgrind`
+
+根据`apt-cache search`的搜寻`gobject-introspection`，相关的包很多，悉数安装
+
+```bash
+apt-get install gir1.2-gconf-2.0 gir1.2-gdkpixbuf-2.0 gir1.2-gee-0.8 gir1.2-gudev-1.0 gir1.2-secret-1 gir1.2-telepathyglib-0.12 gobject-introspection  gir1.2-farstream-0.1  gir1.2-farstream-0.2  gir1.2-folks-0.6   gir1.2-libvirt-glib-1.0   gir1.2-farstream-0.2   gir1.2-folks-0.6   gir1.2-libvirt-glib-1.0   gir1.2-spice-client-glib-2.0  gir1.2-spice-client-gtk-2.0  gir1.2-spice-client-gtk-3.0   gir1.2-uhm-0.0
 ```
 
 
