@@ -203,6 +203,11 @@ apt-get install libglib2.0-dev
 
 成功信息
 
+```bash
+make[1]: Leaving directory '/home/spice-h264/gstreamer'
+[1]+  Exit 2                  make
+```
+
 - 安装gst-plugins-base
 
 `./autogen.sh` 出现如下错误 
@@ -241,3 +246,277 @@ apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 ### Left
 
 - 解决gstreamer安装问题
+
+## 3-23
+
+### To-Dos
+
+- 解决之前卡住的gst-plugins-base安装问题
+- 力争过完所有的doc步骤
+- 因为机器原因，仅在一台单机上尝试
+
+### Logs
+
+- gst-plugins-base
+
+你知道最绝望的事是什么吗，一天没动，`autogen.sh`就可以通过了 ：）现在代码也流行风水和佛系了吗？？？
+
+随缘。
+
+记录一些会缺少的功能
+
+```bash
+configure: *** Plug-ins without external dependencies that will be built:
+	adder
+	app
+	audioconvert
+	audiomixer
+	audiorate
+	audioresample
+	audiotestsrc
+	encoding
+	gio
+	playback
+	rawparse
+	subparse
+	tcp
+	typefind
+	videoconvert
+	videorate
+	videoscale
+	videotestsrc
+	volume
+
+configure: *** Plug-ins without external dependencies that will NOT be built:
+
+configure: *** Plug-ins that have NOT been ported:
+
+configure: *** Plug-ins with dependencies that will be built:
+	 
+	gl
+	ximagesink
+	xvimagesink
+
+configure: *** Plug-ins with dependencies that will NOT be built:
+	alsa
+	cdparanoia
+	ivorbisdec
+	libvisual
+	ogg
+	opus
+	pango
+	theora
+	vorbis
+
+configure: *** Orc acceleration disabled.  Requires Orc >= 0.4.24, which was
+               not found.  Slower code paths will be used.
+
+Now type 'make' to compile gst-plugins-base.
+```
+
+configure之后：
+
+（感觉可能一些包还需要安装以提升性能）
+
+```bash
+configure: *** Plug-ins without external dependencies that will be built:
+	adder
+	app
+	audioconvert
+	audiomixer
+	audiorate
+	audioresample
+	audiotestsrc
+	encoding
+	gio
+	playback
+	rawparse
+	subparse
+	tcp
+	typefind
+	videoconvert
+	videorate
+	videoscale
+	videotestsrc
+	volume
+
+configure: *** Plug-ins without external dependencies that will NOT be built:
+
+configure: *** Plug-ins that have NOT been ported:
+
+configure: *** Plug-ins with dependencies that will be built:
+	 
+	gl
+	ximagesink
+	xvimagesink
+
+configure: *** Plug-ins with dependencies that will NOT be built:
+	alsa
+	cdparanoia
+	ivorbisdec
+	libvisual
+	ogg
+	opus
+	pango
+	theora
+	vorbis
+
+configure: *** Orc acceleration disabled.  Requires Orc >= 0.4.24, which was
+               not found.  Slower code paths will be used.
+```
+
+之后编译成功
+
+- gst-plugins-good
+
+configure后一些功能显示可能会缺少：
+
+```bash
+configure: *** Plug-ins without external dependencies that will be built:
+	alpha
+	apetag
+	audiofx
+	audioparsers
+	auparse
+	autodetect
+	avi
+	cutter
+	debugutils
+	deinterlace
+	dtmf
+	effectv
+	equalizer
+	flv
+	flx
+	goom
+	goom2k1
+	icydemux
+	id3demux
+	imagefreeze
+	interleave
+	isomp4
+	law
+	level
+	matroska
+	multifile
+	multipart
+	replaygain
+	rtp
+	rtpmanager
+	rtsp
+	shapewipe
+	smpte
+	spectrum
+	udp
+	videobox
+	videocrop
+	videofilter
+	videomixer
+	wavenc
+	wavparse
+	y4m
+
+configure: *** Plug-ins without external dependencies that will NOT be built:
+	monoscope
+
+configure: *** Plug-ins that have NOT been ported:
+
+configure: *** Plug-ins with dependencies that will be built:
+	oss4
+	ossaudio
+	png
+	video4linux2
+	ximagesrc
+
+configure: *** Plug-ins with dependencies that will NOT be built:
+	1394
+	aasink
+	cacasink
+	cairo
+	directsoundsink
+	dv
+	flac
+	gdkpixbuf
+	gtk
+	jack
+	jpeg
+	lame
+	mpg123
+	osxaudio
+	osxvideosink
+	pulseaudio
+	qt
+	shout2
+	souphttpsrc
+	speex
+	taglib
+	twolame
+	vpx
+	waveformsink
+	wavpack
+
+configure: *** Orc acceleration disabled.  Requires Orc >= 0.4.17, which was
+               not found.  Slower code paths will be used.
+```
+
+编译安装通过
+
+- gst-plugins-ugly
+
+configure后一些功能显示可能会缺少：
+
+```bash
+configure: *** Plug-ins without external dependencies that will be built:
+	asfdemux
+	dvdlpcmdec
+	dvdsub
+	realmedia
+	xingmux
+
+configure: *** Plug-ins without external dependencies that will NOT be built:
+
+configure: *** Plug-ins that have NOT been ported:
+
+configure: *** Plug-ins with dependencies that will be built:
+
+configure: *** Plug-ins with dependencies that will NOT be built:
+	a52dec
+	amrnb
+	amrwbdec
+	cdio
+	dvdreadsrc
+	mpeg2dec
+	sid
+	x264
+
+configure: *** Orc acceleration disabled.  Requires Orc >= 0.4.16, which was
+               not found.  Slower code paths will be used.
+
+```
+
+编译安装通过
+
+- gstreamer-vaapi
+
+`./autogen.sh`时出错：
+
+```bash
+configure: No package 'gstreamer-codecparsers-1.0' found
+configure: error: no gstreamer-codecparsers-1.0 >= 1.13.1 (yes) found
+  configure failed
+```
+
+
+
+configure后一些功能显示可能会缺少：
+
+
+
+- spice-protocol
+
+configure后一些功能显示可能会缺少：
+
+
+
+### Left
+
