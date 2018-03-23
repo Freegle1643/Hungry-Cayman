@@ -461,6 +461,178 @@ configure: *** Orc acceleration disabled.  Requires Orc >= 0.4.17, which was
 
 编译安装通过
 
+- gst-plugins-bad
+
+configure后一些功能显示可能会缺少：
+
+```bash
+configure: *** Plug-ins without external dependencies that will be built:
+        accurip
+        adpcmdec
+        adpcmenc
+        aiff
+        asfmux
+        audiobuffersplit
+        audiofxbad
+        audiomixmatrix
+        audiovisualizers
+        autoconvert
+        bayer
+        camerabin2
+        coloreffects
+        compositor
+        debugutils
+        dvbsuboverlay
+        dvdspu
+        faceoverlay
+        festival
+        fieldanalysis
+        freeverb
+        frei0r
+        gaudieffects
+        gdp
+        geometrictransform
+        id3tag
+        inter
+        interlace
+        ivfparse
+        ivtc
+        jp2kdecimator
+        jpegformat
+        librfb
+        midi
+        mpegdemux
+        mpegpsmux
+        mpegtsdemux
+        mpegtsmux
+        mxf
+        netsim
+        onvif
+        pcapparse
+        pnm
+        proxy
+        rawparse
+        removesilence
+        sdp
+        segmentclip
+        siren
+        smooth
+        speed
+        stereo
+        subenc
+        timecode
+        videofilters
+        videoframe_audiolevel
+        videoparsers
+        videosignal
+        vmnc
+        y4m
+        yadif
+
+configure: *** Plug-ins without external dependencies that will NOT be built:
+
+configure: *** Plug-ins that have NOT been ported:
+
+configure: *** Plug-ins with dependencies that will be built:
+        dash
+        decklink
+        dvb
+        fbdevsink
+        gl
+        hls
+        ipcpipeline
+        kms
+        shm
+        smoothstreaming
+        vcdsrc
+
+configure: *** Plug-ins with dependencies that will NOT be built:
+        acm
+        androidmedia
+        aom
+        applemedia
+        assrender
+        avcsrc
+        bluez
+        bs2b
+        bz2
+        chromaprint
+        curl
+        daala
+        dc1394
+        dfbvideosink
+        direct3dsink
+        directsoundsrc
+        dtls
+        dtsdec
+        faac
+        faad
+        fdkaac
+        flite
+        fluidsynth
+        gme
+        gsmenc gsmdec
+        iqa
+        kate
+        ladspa
+        lcms2
+        libde265
+        libmms
+        lv2
+        modplug
+        mpeg2enc
+        mplex
+        msdk
+        musepack
+        neonhttpsrc
+        nvdec
+        nvenc
+        ofa
+        openal
+        opencv
+        openexr
+        openh264
+        openjpeg
+        openmpt
+        openni2
+        opensl
+        opus
+        resindvd
+        rsvg
+        rtmp
+        sbc
+        schro
+        sfdec sfenc
+        soundtouch
+        spandsp
+        spc
+        srt
+        srtp
+        teletextdec
+        tinyalsa
+        ttml
+        uvch264
+        vdpau
+        vo-aacenc
+        vo-amrwbenc
+        vulkan
+        wasapi
+        wayland
+        webp
+        webrtc
+        webrtcdsp
+        wildmidi
+        winks
+        winscreencap
+        x265
+        zbar
+
+configure: *** Orc acceleration disabled.  Requires Orc >= 0.4.17, which was
+               not found.  Slower code paths will be used.
+```
+
+
+
 - gst-plugins-ugly
 
 configure后一些功能显示可能会缺少：
@@ -506,17 +678,81 @@ configure: error: no gstreamer-codecparsers-1.0 >= 1.13.1 (yes) found
   configure failed
 ```
 
-
-
-configure后一些功能显示可能会缺少：
-
-
-
-- spice-protocol
+出错是没有安bad，忘记了
 
 configure后一些功能显示可能会缺少：
 
+```bash
 
+gstreamer-vaapi configuration summary:
+
+Installation Prefix .............. : /home/spice-h264/resource
+GStreamer API version ............ : 1.13
+VA-API version ................... : 1.1.0
+Video encoding ................... : yes
+Video outputs .................... : drm x11 glx egl wayland
+
+```
+
+make失败：
+
+```bash
+gstvaapidisplay_x11.c:39:36: fatal error: X11/extensions/Xrandr.h: No such file or directory
+compilation terminated.
+Makefile:1372: recipe for target 'libgstvaapi_x11_la-gstvaapidisplay_x11.lo' failed
+make[4]: *** [libgstvaapi_x11_la-gstvaapidisplay_x11.lo] Error 1
+make[4]: Leaving directory '/home/spice-h264/gstreamer-vaapi/gst-libs/gst/vaapi'
+Makefile:471: recipe for target 'all-recursive' failed
+make[3]: *** [all-recursive] Error 1
+make[3]: Leaving directory '/home/spice-h264/gstreamer-vaapi/gst-libs/gst'
+Makefile:471: recipe for target 'all-recursive' failed
+make[2]: *** [all-recursive] Error 1
+make[2]: Leaving directory '/home/spice-h264/gstreamer-vaapi/gst-libs'
+Makefile:542: recipe for target 'all-recursive' failed
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory '/home/spice-h264/gstreamer-vaapi'
+Makefile:474: recipe for target 'all' failed
+make: *** [all] Error 2
+```
+
+根据提示：
+
+```bash
+root@haoyuan-Broadwell:/home/spice-h264/gstreamer-vaapi# apt-cache search Xrandr
+libxrandr-dev - X11 RandR extension library (development headers)
+libxrandr2 - X11 RandR extension library
+libxrandr2-dbg - X11 RandR extension library (debug package)
+```
+
+搜索后需要安装 `apt-get install libxrandr*` ，错误输出减少：
+
+```bash
+make[3]: Entering directory '/home/spice-h264/gstreamer-vaapi/tests'
+  CCLD     simple-decoder
+./.libs/libutils.a(libgstvaapi_x11_la-gstvaapidisplay_x11.o): In function `gst_vaapi_display_x11_get_size_mm':
+/home/spice-h264/gstreamer-vaapi/gst-libs/gst/vaapi/gstvaapidisplay_x11.c:274: undefined reference to `XRRRootToScreen'
+/home/spice-h264/gstreamer-vaapi/gst-libs/gst/vaapi/gstvaapidisplay_x11.c:276: undefined reference to `XRRGetScreenInfo'
+/home/spice-h264/gstreamer-vaapi/gst-libs/gst/vaapi/gstvaapidisplay_x11.c:280: undefined reference to `XRRConfigCurrentConfiguration'
+/home/spice-h264/gstreamer-vaapi/gst-libs/gst/vaapi/gstvaapidisplay_x11.c:292: undefined reference to `XRRFreeScreenConfigInfo'
+/home/spice-h264/gstreamer-vaapi/gst-libs/gst/vaapi/gstvaapidisplay_x11.c:284: undefined reference to `XRRSizes'
+./.libs/libutils.a(libgstvaapi_x11_la-gstvaapidisplay_x11.o): In function `check_extensions':
+/home/spice-h264/gstreamer-vaapi/gst-libs/gst/vaapi/gstvaapidisplay_x11.c:118: undefined reference to `XRRQueryExtension'
+collect2: error: ld returned 1 exit status
+Makefile:789: recipe for target 'simple-decoder' failed
+make[3]: *** [simple-decoder] Error 1
+make[3]: Leaving directory '/home/spice-h264/gstreamer-vaapi/tests'
+Makefile:1158: recipe for target 'all-recursive' failed
+make[2]: *** [all-recursive] Error 1
+make[2]: Leaving directory '/home/spice-h264/gstreamer-vaapi/tests'
+Makefile:542: recipe for target 'all-recursive' failed
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory '/home/spice-h264/gstreamer-vaapi'
+Makefile:474: recipe for target 'all' failed
+make: *** [all] Error 2
+
+```
 
 ### Left
 
+- gstreamer-vaapi安装尚未成功
+- doc还没过完
