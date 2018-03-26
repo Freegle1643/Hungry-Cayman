@@ -756,3 +756,21 @@ make: *** [all] Error 2
 
 - gstreamer-vaapi安装尚未成功
 - doc还没过完
+
+## 3-26
+
+### To-Dos
+
+- gstreamer-vaapi安装
+- doc尽可能过完
+
+### Logs
+
+- gstreamer-vaapi
+
+诡异的是，make通过了
+
+- spice-protocol
+
+### Left
+
