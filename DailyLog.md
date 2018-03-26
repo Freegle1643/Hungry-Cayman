@@ -772,5 +772,132 @@ make: *** [all] Error 2
 
 - spice-protocol
 
+同样很快的，编译通过了
+
+- Setup Spice Server
+- Build SPICE
+
+打上patch，`./autogen.sh`有错，安装相应软件包
+
+```bash
+checking for ORC... no
+configure: error: Package requirements (orc-0.4) were not met:
+
+No package 'orc-0.4' found
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables ORC_CFLAGS
+and ORC_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+```
+
+根据搜索结果安装`apt-get install liborc-0.4-*`
+
+再根据输出，安装`celt051`，这个包没有在debian软件包里，需要手动编译安装
+
+```bash
+ cd /home/spice-h264
+ wget https://src.fedoraproject.org/repo/pkgs/celt051/celt-0.5.1.3.tar.gz/67e7b5e45db57a6f1f0a6962f5ecb190/celt-0.5.1.3.tar.gz
+ tar xzf celt-0.5.1.3.tar.gz
+ cd celt-0.5.1.3
+ ./configure --prefix=/home/spice-h264/resource/
+ make && make install
+```
+
+然后再安装`apt-get install openssl`
+
+但是还有下面的错误，同安装前一样：
+
+```bash
+checking for SSL... no
+configure: error: Package requirements (openssl) were not met:
+
+No package 'openssl' found
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables SSL_CFLAGS
+and SSL_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+```
+
+额，居然安装了这个就过了`sudo apt-get install libssl-dev`
+
+然后现在又有问题：
+
+```bash
+checking for jpeg_destroy_decompress in -ljpeg... no
+configure: error: libjpeg not found
+```
+
+根据`apt-cache search`的结果：
+
+```bash
+root@haoyuan-Broadwell:/home/spice-h264/spice# apt-cache search libjpeg
+libjpeg-dev - Independent JPEG Group's JPEG runtime library (dependency package)
+libjpeg-turbo8 - IJG JPEG compliant runtime library.
+libjpeg-turbo8-dbg - Debugging symbols for the libjpeg-turbo library
+libjpeg-turbo8-dev - Development files for the IJG JPEG library
+libjpeg8 - Independent JPEG Group's JPEG runtime library (dependency package)
+libjpeg8-dbg - Independent JPEG Group's JPEG runtime library (dependency package)
+libjpeg8-dev - Independent JPEG Group's JPEG runtime library (dependency package)
+gem-plugin-jpeg - Graphics Environment for Multimedia - JPEG support
+imgsizer - Adds WIDTH and HEIGHT attributes to IMG tags in HTML files
+jp2a - converts jpg images to ascii
+libjpeg-progs - Programs for manipulating JPEG files
+libjpeg-turbo-progs - Programs for manipulating JPEG files
+libjpeg-turbo-test - Program for benchmarking and testing libjpeg-turbo
+libjpeg62 - Independent JPEG Group's JPEG runtime library (version 6.2)
+libjpeg62-dbg - Development files for the IJG JPEG library (version 6.2)
+libjpeg62-dev - Development files for the IJG JPEG library (version 6.2)
+libjpeg9 - Independent JPEG Group's JPEG runtime library
+libjpeg9-dbg - Development files for the IJG JPEG library
+libjpeg9-dev - Development files for the IJG JPEG library
+```
+
+安装第一个`sudo apt-get install libjpeg-dev`
+
+autogen成功：
+
+```bash
+configure:
+
+        Spice 0.14.0.2-8f4b-dirty
+        ==============
+
+        prefix:                   /usr/local
+        C compiler:               gcc
+
+        LZ4 support:              no
+        Smartcard:                no
+        GStreamer:                1.0
+        SASL support:             no
+        Manual:                   no
+
+        Now type 'make' to build spice
+
+configure: WARNING: The avenc_mjpeg GStreamer element(s) are missing. You should be able to find them in the gstreamer-libav 1.0 package.
+
+configure: WARNING: The vp8enc vp9enc GStreamer element(s) are missing. You should be able to find them in the gst-plugins-good 1.0 package.
+
+configure: WARNING: The x264enc GStreamer element(s) are missing. You should be able to find them in the gst-plugins-ugly 1.0 package.
+
+configure: WARNING: The GStreamer video encoder can be built but may not work.
+```
+
+之后的make没有成功，发现是patch没打完全，搞定之后安装成功
+
+- x11spice
+
+`./autogen.sh`的时候有包的缺失，安装之：
+
+```bash
+apt-get install libxcb-damage0* libxcb-xtest0* libxcb-xkb* 
+```
+
 ### Left
 
+- 以上安装待续，进行到了`No package 'gtk+-3.0' found`的阶段
