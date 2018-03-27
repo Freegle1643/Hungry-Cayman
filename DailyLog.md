@@ -901,3 +901,129 @@ apt-get install libxcb-damage0* libxcb-xtest0* libxcb-xkb*
 ### Left
 
 - 以上安装待续，进行到了`No package 'gtk+-3.0' found`的阶段
+
+## 3-27
+
+### To-Dos
+
+- 继续`gtk+-3.0`及后续的配置
+- 过完Doc
+
+### Logs
+
+- `gtk+-3.0` 目前可以看到这些包
+
+```bash
+gir1.2-gtk-3.0 - GTK+ graphical user interface library -- gir bindings
+libgtk-3-0 - GTK+ graphical user interface library
+libgtk-3-0-dbg - GTK+ libraries and debugging symbols
+gir1.2-javascriptcoregtk-3.0 - JavaScript engine library from WebKitGTK+ - GObject introspection data
+gir1.2-spice-client-gtk-3.0 - GTK3 widget for SPICE clients (GObject-Introspection)
+libjavascriptcoregtk-3.0-0 - JavaScript engine library from WebKitGTK+
+libjavascriptcoregtk-3.0-0-dbg - JavaScript engine library from WebKitGTK+ - debugging symbols
+libjavascriptcoregtk-3.0-bin - JavaScript engine library from WebKitGTK+ - command-line interpreter
+libjavascriptcoregtk-3.0-dev - JavaScript engine library from WebKitGTK+ - development files
+libspice-client-gtk-3.0-4 - GTK3 widget for SPICE clients (runtime library)
+libspice-client-gtk-3.0-dev - GTK3 widget for SPICE clients (development files)
+libwebkit2gtk-3.0-25 - WebKit2 API layer for WebKitGTK+
+libwebkit2gtk-3.0-25-dbg - WebKit2 API layer for WebKitGTK+ - debugging symbols
+libwebkit2gtk-3.0-dev - WebKit2 API layer for WebKitGTK+ - development files
+libwebkitgtk-3.0-0 - Web content engine library for GTK+
+libwebkitgtk-3.0-0-dbg - Web content engine library for GTK+ - debugging symbols
+libwebkitgtk-3.0-common - Web content engine library for GTK+ - data files
+libwebkitgtk-3.0-dev - Web content engine library for GTK+ - development files
+```
+
+根据描述安装：
+
+```bash
+apt-get install gir1.2-gtk-3.0 libgtk-3-0 libgtk-3-0-dbg gir1.2-spice-client-gtk-3.0 libspice-client-gtk-3.0-4 libspice-client-gtk-3.0-dev
+```
+
+`autogen.sh`成功
+
+make成功
+
+- spice-gtk
+
+打了patch之后在`autogen.sh`时出错：
+
+```bash
+checking for valac... valac
+configure: WARNING: no proper vala compiler found
+configure: WARNING: you will not be able to compile vala source files
+checking for vapigen... no
+configure: error: Cannot find the "vapigen" binary in your PATH
+```
+
+然后我们根据apt-cache search的结果安装：
+
+```bash
+apt-get install valac*
+```
+
+之后成功并有如下提示：
+
+```bash
+
+configure:
+
+        Spice-Gtk 0.34-dirty
+        ==============
+
+        prefix:                   /usr/local
+        c compiler:               gcc
+        Target:                   Unix
+
+        Gtk:                      3.0
+        Coroutine:                ucontext
+        PulseAudio:               no
+        GStreamer Audio:          yes
+        GStreamer Video:          yes
+        SASL support:             no
+        Smartcard support:        no
+        USB redirection support:  no
+        DBus:                     yes
+        WebDAV support:           no
+        LZ4 support:              no
+
+        Now type 'make' to build spice-gtk
+
+
+configure: WARNING: The jpegdec vp8dec vp9dec GStreamer element(s) are missing. You should be able to find them in the gst-plugins-good 1.0 package.
+
+configure: WARNING: The avdec_h264 GStreamer element(s) are missing. You should be able to find them in the gstreamer-libav 1.0 package.
+
+configure: WARNING: The GStreamer video decoder can be built but may not work.
+
+```
+
+`make`出现下面的错误
+
+```bash
+Traceback (most recent call last):
+  File "../spice_codegen.py", line 7, in <module>
+    from python_modules import spice_parser
+  File "/home/spice-h264/spice-gtk/spice-common/python_modules/spice_parser.py", line 1, in <module>
+    import six
+ImportError: No module named six
+Makefile:810: recipe for target 'generated_client_demarshallers.c' failed
+make[4]: *** [generated_client_demarshallers.c] Error 1
+make[4]: Leaving directory '/home/spice-h264/spice-gtk/spice-common/common'
+Makefile:456: recipe for target 'all-recursive' failed
+make[3]: *** [all-recursive] Error 1
+make[3]: Leaving directory '/home/spice-h264/spice-gtk/spice-common'
+Makefile:388: recipe for target 'all' failed
+make[2]: *** [all] Error 2
+make[2]: Leaving directory '/home/spice-h264/spice-gtk/spice-common'
+Makefile:628: recipe for target 'all-recursive' failed
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory '/home/spice-h264/spice-gtk'
+Makefile:533: recipe for target 'all' failed
+make: *** [all] Error 2
+```
+
+
+
+### Left
+
