@@ -1023,7 +1023,18 @@ Makefile:533: recipe for target 'all' failed
 make: *** [all] Error 2
 ```
 
+装了`python-six`后还是后面的那几个问题，于是我一气之下根据[Debian -- 在 buster 中的 spice-gtk 源码包详细信息](https://packages.debian.org/source/buster/spice-gtk)的软件包依赖部分安装了如下的软件包：
 
+```bash
+apt-get install  debhelper  libpixman-1-dev  libssl-dev  libgtk-3-dev   libglib2.0-dev  libgudev-1.0-dev  libcairo2-dev  libpulse-dev   libusb-1.0-0-dev   valac   python-all   python-six   python-gtk2-dev  python-pyparsing  libsasl2-dev  libjpeg-dev  gobject-introspection  libgirepository1.0-dev gir1.2-gtk-2.0 libtext-csv-perl   libusbredirhost-dev  libacl1-dev  libpolkit-agent-1-dev libpolkit-gobject-1-dev  dpkg-dev  libdbus-glib-1-dev libopus-dev  libsoup2.4-dev  gtk-doc-tools liblz4-dev  libcacard-dev  libspice-protocol-dev   libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gettext libepoxy-dev
+```
+
+于是成功了 ：）
+
+- Test server & client
+
+成功，但是之前忘记打gstreamer-vaapi的patch了，不知道是否调用到了，我们就假设是调用到了吧 ：）逃
 
 ### Left
 
+- 结束文档的审阅工作，准备进入自己的Xspice工作
