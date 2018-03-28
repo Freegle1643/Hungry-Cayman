@@ -1038,3 +1038,26 @@ apt-get install  debhelper  libpixman-1-dev  libssl-dev  libgtk-3-dev   libglib2
 ### Left
 
 - 结束文档的审阅工作，准备进入自己的Xspice工作
+
+## 3-28
+
+### To-Dos
+
+- 审阅Xmind的毕设思维导图
+- 分析x11spice / vaapi /h.264 porting 到XSpice的可能
+- 做些许尝试
+
+### Logs
+
+N/A
+
+### Left
+
+All
+
+## 3-29
+
+### To-Dos
+
+- 根据[README](https://cgit.freedesktop.org/xorg/driver/xf86-video-qxl/tree/README.xspice)来徒手配置Xspice
+- 如果当日配置完成，分析哪些部分需要进行改进
