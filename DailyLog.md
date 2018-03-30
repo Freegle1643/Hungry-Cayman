@@ -1055,9 +1055,17 @@ N/A
 
 All
 
-## 3-29
+## 3-29/30
 
 ### To-Dos
 
 - 根据[README](https://cgit.freedesktop.org/xorg/driver/xf86-video-qxl/tree/README.xspice)来徒手配置Xspice
 - 如果当日配置完成，分析哪些部分需要进行改进
+
+### Log
+
+见Linux上的`Build Xspice from Scratch.md`
+
+### Left
+
+- 在本机本地已经尝试可行，准备向Docker中迁移
