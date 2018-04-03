@@ -1069,3 +1069,18 @@ All
 ### Left
 
 - 在本机本地已经尝试可行，准备向Docker中迁移
+
+## 4-02/03
+
+### To-Dos
+
+- 尽可能弄完Docker中的XSpice
+- 继续寻找Web资源
+- MySQL
+
+### Logs
+
+见`Build Xspice inside Docker Container.md`
+
+### Left
+
