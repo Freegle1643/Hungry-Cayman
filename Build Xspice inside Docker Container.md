@@ -12,10 +12,11 @@ First of all, we set up an Ubuntu image based on `ubuntu:16.04`.  Here we don't 
 apt-get update
 apt-get install sudo wget curl net-tools git vim \
 				dh-autoreconf pkg-config \
-				glib* libpixman-1-* \
+				glib* libpixman-1-* bison \
 				gtk-doc* gobject-introspection libglib2.0-dev libxrandr* libjpeg-dev\ 
 				liborc-0.4-* libssl-dev libxcb-damage0* libxcb-xtest0* libxcb-xkb* \
-				python-all   python-six   python-gtk2-dev  python-pyparsing 
+				python-all   python-six   python-gtk2-dev  python-pyparsing \
+				texlive-font-utils xfonts-utils
 ```
 
 ## Git Clone Every Source Code
@@ -121,6 +122,8 @@ make && make install
 
 ### Build xkbcomp
 
+`apt-get install bison`
+
 ```bash
 cd /home/xspice-test/src/xkbcomp
 ./autogen.sh --prefix=$TEST
@@ -139,6 +142,8 @@ make && make install
 
 ### Build xserver
 
+`apt-get install texlive-font-utils xfonts-utils ` 
+
 Before the actual building of xserver, we need to build `libdrm` on our own because the package in package source of my Ubuntu distribution is too old to meet the latest requirement of xserver.
 
 - Build libdrm
@@ -150,6 +155,8 @@ apt-get install libdrm-dev libdrm-intel1 libdrm2 libdrm-common
 如果还出现问题我们可以使用apt-get upgrade后接相应的软件包进行升级，以满足条件，或者可以通过调整所build的xserver版本，使其对libdrm的版本要求降低。
 
 本人配置的时候通过重新编译了一个libdrm来进行操作
+
+`apt-get install libpciaccess*`
 
 ```
 cd /home/xspice-test/src
@@ -182,6 +189,8 @@ Then we need to set `ACLOCAL` for libxtrans
 `export ACLOCAL="aclocal -I $TEST/share/aclocal"`
 
 Now we can use the following to build xserver
+
+``
 
 ```bash
 cd /home/xspice-test/src/xserver
