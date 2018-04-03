@@ -156,7 +156,7 @@ apt-get install libdrm-dev libdrm-intel1 libdrm2 libdrm-common
 
 本人配置的时候通过重新编译了一个libdrm来进行操作
 
-`apt-get install libpciaccess*`
+`apt-get install libpciaccess* libgl1-mesa-dev libepoxy* ` 
 
 ```
 cd /home/xspice-test/src
@@ -189,8 +189,6 @@ Then we need to set `ACLOCAL` for libxtrans
 `export ACLOCAL="aclocal -I $TEST/share/aclocal"`
 
 Now we can use the following to build xserver
-
-``
 
 ```bash
 cd /home/xspice-test/src/xserver

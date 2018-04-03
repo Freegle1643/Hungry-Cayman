@@ -1086,4 +1086,4 @@ All
 
 - Windows环境下安装Django有错
 - Linux环境下（Windows子系统）无法进行MySQL连接
-- ​
+- 在xserver部分卡住了，有个之前在native机子上没安装过的`libepoxy*`可能带来了问题
