@@ -16,7 +16,9 @@ apt-get install sudo wget curl net-tools git vim \
 				gtk-doc* gobject-introspection libglib2.0-dev libxrandr* libjpeg-dev\ 
 				liborc-0.4-* libssl-dev libxcb-damage0* libxcb-xtest0* libxcb-xkb* \
 				python-all   python-six   python-gtk2-dev  python-pyparsing \
-				texlive-font-utils xfonts-utils
+				texlive-font-utils xfonts-utils \
+				libpciaccess* libgl1-mesa-dev libgles2-mesa-dev \
+				xorg-dev
 ```
 
 ## Git Clone Every Source Code
@@ -156,9 +158,9 @@ apt-get install libdrm-dev libdrm-intel1 libdrm2 libdrm-common
 
 本人配置的时候通过重新编译了一个libdrm来进行操作
 
-`apt-get install libpciaccess* libgl1-mesa-dev libepoxy* ` 
+`apt-get install libpciaccess* libgl1-mesa-dev libgles2-mesa-dev`
 
-```
+```bash
 cd /home/xspice-test/src
 git clone https://anongit.freedesktop.org/git/mesa/drm.git/
 cd /home/xspice-test/src/drm
@@ -166,6 +168,18 @@ cd /home/xspice-test/src/drm
 ./configure --prefix=$TEST
 make && make install
 ```
+
+  
+
+```bash
+cd /home/xspice-test/src
+git clone https://github.com/anholt/libepoxy.git
+./autogen.sh --prefix=$TEST
+./configure --prefix=$TEST
+make && make install
+```
+
+
 
 - Now we build xserver
 
