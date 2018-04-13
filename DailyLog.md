@@ -1087,3 +1087,13 @@ All
 - Windows环境下安装Django有错
 - Linux环境下（Windows子系统）无法进行MySQL连接
 - 在xserver部分卡住了，有个之前在native机子上没安装过的`libepoxy*`可能带来了问题
+
+## 4-09/10
+
+` condescending_babbage`这个镜像现在可以成功的进行xspice的尝试
+
+但是是使用的有vappi的gstreamer（for x11spice）的以及`xserver-xspice`，仅作为一个尝试
+
+后续有还需要重新在一个Docker镜像中配置gstreamer，安装xserver-xspice，同时尽可能找到代码来修改打印h.264的调用情况
+
+中文乱码问题通过安装`fonts-wqy-zenhei`包修复
