@@ -28,17 +28,17 @@ docker run -it \
 Run the commands below to setup the directory for download source
 
 ```bash
- mkdir -p /home/spice-h264
- mkdir -p /home/spice-h264/src
+ mkdir -p /home/spice-h264-build
+ mkdir -p /home/spice-h264-build/src
 ```
 
-Save the script listed below as "env.sh" and place it in the root directory of project, i.e. `/home/spice-h264`.
+Save the script listed below as "env.sh" and place it in the root directory of project, i.e. `/home/spice-h264-build`.
 
 ```shell
 #! /bin/bash  
-export PATH=/home/spice-h264/src/bin/:$PATH 
-export LD_LIBRARY_PATH=/home/spice-h264/src/lib/:$LD_LIBRARY_PATH 
-export PKG_CONFIG_PATH=/home/spice-h264/src/lib/pkgconfig/:/home/spice-h264/src/share/pkgconfig:$PKG_CONFIG_PATH
+export PATH=/home/spice-h264-build/src/bin/:$PATH 
+export LD_LIBRARY_PATH=/home/spice-h264-build/src/lib/:$LD_LIBRARY_PATH 
+export PKG_CONFIG_PATH=/home/spice-h264-build/src/lib/pkgconfig/:/home/spice-h264-build/src/share/pkgconfig:$PKG_CONFIG_PATH
 ```
 
 Run the commands below before you start doing other things
@@ -63,17 +63,36 @@ sudo apt-get install \
     bison flex 
 ```
 
+You can alternatively git clone all of the resources using a script, simply copy the following and run it
+
+```shel
+#! /bin/bash
+git clone https://github.com/01org/libva.git
+git clone https://github.com/01org/intel-vaapi-driver.git
+git clone https://github.com/intel/libva-utils
+git clone https://anongit.freedesktop.org/git/gstreamer/gstreamer.git
+git clone https://anongit.freedesktop.org/git/gstreamer/gst-plugins-base.git
+git clone https://anongit.freedesktop.org/git/gstreamer/gst-plugins-good.git
+git clone https://anongit.freedesktop.org/git/gstreamer/gst-plugins-bad.git
+git clone https://anongit.freedesktop.org/git/gstreamer/gst-plugins-ugly.git
+git clone https://anongit.freedesktop.org/git/gstreamer/gstreamer-vaapi.git
+git clone https://anongit.freedesktop.org/git/spice/spice-protocol.git
+git clone https://anongit.freedesktop.org/git/gstreamer/orc.git
+```
+
+I named it `gitclone.sh`, and then use `source gitclone.sh` to clone them. Then you can skip all the following steps that are to clone the repository.
+
 ### 2.2 Build libva
 
 Run the commands below to build libva
 
 ```
- # cd /home/spice-h264
+ # cd /home/spice-h264-build
  # git clone https://github.com/01org/libva.git
  # cd libva
  # git checkout v2.1-branch
  # ./autogen.sh
- # ./configure --prefix=/home/spice-h264/src/
+ # ./configure --prefix=/home/spice-h264-build/src/
  # make && make install
 ```
 
@@ -140,11 +159,11 @@ THE `LDFLAGS` is used to fix the error `/bin/ld: cannot find -lgstvideo-1.0` whe
 When makeing gst-plugins-good, I discover that this may accelerate the overall performance
 
 ```
- # cd /home/spice-h264
+ # cd /home/spice-h264-build
  # git clone https://anongit.freedesktop.org/git/gstreamer/orc.git
  # cd orc
  # ./autogen.sh
- # ./configure --prefix=/home/spice-h264/src/
+ # ./configure --prefix=/home/spice-h264-build/src/
  # make && make install
 ```
 
@@ -194,7 +213,7 @@ Run the commands below to build gst-plugins-ugly
 
 ### 2.10 Build gstreamer-vaapi
 
-Save the patch below and apply the patch before building gstreamer-vaapi.
+Save the patch below and apply the patch before building gstreamer-vaapi. [after `git checkout 1.13.1`]
 
 `gstreamer-vaapi.patch` as attached in the email or package you received.
 
