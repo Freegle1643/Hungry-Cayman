@@ -1097,3 +1097,10 @@ All
 后续有还需要重新在一个Docker镜像中配置gstreamer，安装xserver-xspice，同时尽可能找到代码来修改打印h.264的调用情况
 
 中文乱码问题通过安装`fonts-wqy-zenhei`包修复
+
+## 4-18
+
+Extra Links For Chuibi
+
+[可以识别用户OS等信息](https://stackoverflow.com/questions/2669294/how-to-detect-browser-type-in-django?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
+
